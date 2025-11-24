@@ -9,18 +9,3 @@
 !_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
 !_TAG_PROGRAM_URL	https://ctags.io/	/official site/
 !_TAG_PROGRAM_VERSION	5.9.0	//
-CalculateComparisons	test.c	/^int CalculateComparisons(int n)$/;"	f	typeref:typename:int
-CountSort	test.c	/^void CountSort(SeqList *L, SeqList *SortedL)$/;"	f	typeref:typename:void
-InitSeqList	test.c	/^void InitSeqList(SeqList *L)$/;"	f	typeref:typename:void
-MAXSIZE	test.c	/^#define MAXSIZE /;"	d	file:
-PrintSeqList	test.c	/^void PrintSeqList(SeqList *L)$/;"	f	typeref:typename:void
-RecordType	test.c	/^} RecordType;$/;"	t	typeref:struct:__anon1dda1bf60108	file:
-SelectionSort	test.c	/^void SelectionSort(SeqList *L)$/;"	f	typeref:typename:void
-SeqList	test.c	/^} SeqList;$/;"	t	typeref:struct:__anon1dda1bf60208	file:
-__anon1dda1bf60108	test.c	/^{$/;"	s	file:
-__anon1dda1bf60208	test.c	/^{$/;"	s	file:
-data	test.c	/^    char data;$/;"	m	struct:__anon1dda1bf60108	typeref:typename:char	file:
-key	test.c	/^    int key;$/;"	m	struct:__anon1dda1bf60108	typeref:typename:int	file:
-length	test.c	/^    int length;$/;"	m	struct:__anon1dda1bf60208	typeref:typename:int	file:
-main	test.c	/^int main(void)$/;"	f	typeref:typename:int
-records	test.c	/^    RecordType records[MAXSIZE];$/;"	m	struct:__anon1dda1bf60208	typeref:typename:RecordType[]	file:
