@@ -9,3 +9,21 @@
 !_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
 !_TAG_PROGRAM_URL	https://ctags.io/	/official site/
 !_TAG_PROGRAM_VERSION	5.9.0	//
+AUTHOR_NAME_LEN	Chapter1/顺序表.c	/^#define AUTHOR_NAME_LEN /;"	d	file:
+BOOK	Chapter1/顺序表.c	/^}BOOK;$/;"	t	typeref:struct:__anon17b0f8800308	file:
+BOOK_NAME_LEN	Chapter1/顺序表.c	/^#define BOOK_NAME_LEN /;"	d	file:
+CreateList	Chapter1/顺序表.c	/^void CreateList(SeqList *List) $/;"	f	typeref:typename:void
+FinByID	Chapter1/顺序表.c	/^int FinByID(SeqList *list, int id)$/;"	f	typeref:typename:int
+FindByName	Chapter1/顺序表.c	/^int FindByName(SeqList *list, const char *name)$/;"	f	typeref:typename:int
+GetBook	Chapter1/顺序表.c	/^GetBook(SeqList *list, int position, Book *book)$/;"	f	typeref:typename:int
+InitList	Chapter1/顺序表.c	/^void InitList(SeqList *list) $/;"	f	typeref:struct:__anon17b0f8800408 void
+InsertBook	Chapter1/顺序表.c	/^int InsertBook(SeqList *list, int position, Book newBook) {$/;"	f	typeref:typename:int
+InsertBook	Chapter1/顺序表.c	/^int InsertBook(SeqList *list, int position, Book newBook)$/;"	f	typeref:typename:int
+MAX_SIZE	Chapter1/顺序表.c	/^#define MAX_SIZE /;"	d	file:
+__anon17b0f8800308	Chapter1/顺序表.c	/^{$/;"	s	file:
+__anon17b0f8800408	Chapter1/顺序表.c	/^{$/;"	s	file:
+author	Chapter1/顺序表.c	/^    char author[AUTHOR_NAME_LEN];       \/\/ 作者$/;"	m	struct:__anon17b0f8800308	typeref:typename:char[]	file:
+books	Chapter1/顺序表.c	/^    Book books[MAX_SIZE];   \/\/  存储图书的数组$/;"	m	struct:__anon17b0f8800408	typeref:typename:Book[]	file:
+id	Chapter1/顺序表.c	/^    int id;                             \/\/图书ID$/;"	m	struct:__anon17b0f8800308	typeref:typename:int	file:
+length	Chapter1/顺序表.c	/^    int length;             \/\/  当前顺序表的长度（实际元素个数）$/;"	m	struct:__anon17b0f8800408	typeref:typename:int	file:
+name	Chapter1/顺序表.c	/^    char name[BOOK_NAME_LEN];           \/\/ 图书名称 $/;"	m	struct:__anon17b0f8800308	typeref:typename:char[]	file:

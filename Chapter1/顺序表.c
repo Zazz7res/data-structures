@@ -123,6 +123,23 @@ int FindByName(SeqList *list, const char *name)
 {
     /*
        功能：根据图书名称查找位置
-       参数
+       参数: list  --  指向顺序表的指针，name  -- 查找的图书名称
+       返回值: 找到返回位置（从1开始），未找到返回-1
     */
+
+    for (int i = 0; i < list->length; i++)
+        if (strcmp(list->books[i].name, name) == 0)
+        {
+            printf("找到图书《%s》，位于位置 %d\n", name, i + 1);
+            return i + 1;
+        }
+    printf("未找到图书 《%s》\n", name);
+    return -1;
+
 }
+
+//  6. 插入操作: 在指定位置插入新元素
+int InsertBook(SeqList *list, int position, Book newBook)
+{
+    /*
+
