@@ -112,7 +112,7 @@ void CreateList(SeqList *list) {
 
     // 将初始化数据复制到顺序表中
     for (int i = 0; i < initialCount; i++) {
-        list->boos[list->length] = initialBooks[i];
+        list->books[list->length] = initialBooks[i];
         list->length++;
     }
     /*  关键逻辑：
@@ -201,7 +201,7 @@ int FindByID(SeqList *list, int id) {
 
     //  顺序查找：从第一个元素开始逐个比较
     for (int i = 0; i < list->length; i++) {
-        if (list->boos[i].id == id) {
+        if (list->books[i].id == id) {
             printf("找到图书ID %d, 位于位置 %d\n", id, i + 1);
             return i + 1;
         }
@@ -258,7 +258,7 @@ int InsertBook(SeqList *list, int position, Book newBook) {
      *      newBook - 要插入的新图书
      *  返回值：成功返回1,失败返回0
      */ 
-
+    // 2. 双重检查机制
     // 检查顺序表是否已满
     if (list->length >= MAX_SIZE) {
         printf("错误：顺序表已满，无法插入新数据！\n");
@@ -267,7 +267,7 @@ int InsertBook(SeqList *list, int position, Book newBook) {
 
     // 检查插入位置是否合法
     if (position < 1 || position > list->length + 1) {
-        printf("错误：插入位置 %d 不合法！有效范围是 1 到 %d\n", position, list->length + 1)
+        printf("错误：插入位置 %d 不合法！有效范围是 1 到 %d\n", position, list->length + 1);
             return 0;
     }
 
@@ -276,7 +276,10 @@ int InsertBook(SeqList *list, int position, Book newBook) {
     for (int i = list->length - 1; i >= position - 1; i--) {
         list->books[i + 1] = list->books[i];
     }
-
+    /* 关键理解：
+        移动方向：从后往前移动（从最后一个元素开始）
+        为什么不能从前往后？如果从前往后移动，会覆盖后面的数据
+    */ 
     // 在空出的位置插入新元素
     list->books[position - 1] = newBook;
 
@@ -310,5 +313,119 @@ int DeleteBook(SeqList *list, int position) {
     //保存被删除的图书信息用于显示
     Book DeleteBook = list->books[position - 1];
 
-    //顺序表删除的核心步骤：将删除位置
+    //顺序表删除的核心步骤：将删除位置之后的元素都向前移动一位
+    //注意：要从删除位置的下一个元素开始向前移动
+    //3. 核心算法：元素前移
+    for (int i = position; i < list->length; i++) {
+    list->books[i - 1] = list->books[i];
+    }
+
+    /*
+        关键理解：
+        移动方向：从前往后移动（从删除位置的下一个开始）
+        为什么不能从后往前？如果从后往前，会提前覆盖需要的数据
+    */ 
+        
+    //表长减1
+    list->length--;
+
+    printf("成功删除位置 %d 的图书：《%s》\n", position, DeleteBook.name);
+    return 1;
+}
+
+// 8.遍历输出顺序表
+void DisplayList(SeqList *list) {
+    /*
+     * 功能：遍历并显示顺序表中的所有图书信息
+     * 参数：list - 指向顺序表的指针
+     */ 
+    // 2. 空表检查
+    if (list->length == 0) {
+        printf("顺序表为空！\n");
+        return;
+    }
+
+    printf("\n====== 图书馆藏书列表（共%d本）======\n", list->length);
+    printf("%-4s %-6s %-30s %-20s %s\n", "序号", "ID", "书名", "作者", "出版年份");
+    printf("----------------------------------------------------------------\n");
+
+    for (int i = 0; i < list->length; i++) {
+        printf("%-4d  %-6d  %-30s  %-20s  %d\n",
+                i + 1,
+                list->books[i].id,
+                list->books[i].name,
+                list->books[i].author,
+                list->books[i].year);
+    }
+    printf("==================================================================\n\n");
+
+}
+
+// 9.获取顺序表的长度
+int GetLength(SeqList *list) {
+    /*
+     * 功能：获取顺序表的当前长度
+     * 参数：list - 指向顺序表的指针
+     * 返回值：顺序表的长度
+     */ 
+    return list->length == 0;
+}
+
+// 10.判断顺序表是否为空
+int IsEmpty(SeqList *list) {
+    /*
+     * 功能：判断顺序表是否为空
+     * 参数：list - 指向顺序表的指针
+     * 返回值：为空返回1,不为空返回0
+     */ 
+    return list->length == 0;
+}
+
+// 演示函数：展示所有操作
+void Demo() {
+    printf("================== 顺序表操作演示 - 图书管理系统==================\n\n");
+
+    SeqList library;  // 声明一个顺序表
+    Book tempBook;  // 临时变量，用于存储获取的图书
+    
+
+    //1. 初始化顺序表
+    InitList(&library);
+    printf("\n");
+
+    // 2.创建带有初始化数据的顺序表
+    CreateList(&library);
+    DisplayList(&library);
+
+    // 3.获取操作演示
+    printf("3. 取值操作演示：\n");
+    GetBook(&library, 2, &tempBook);
+    printf("\n");
+
+    // 4.查找操作演示
+    printf("4. 查找操作演示：\n");
+    FindByID(&library, 1003);
+    FindByName(&library, "算法导论");
+    printf("\n");
+
+    // 6.删除操作演示
+    printf("6.删除操作演示：\n");
+    DeleteBook(&library, 4);
+    DisplayList(&library);
+
+    // 7.其他操作演示
+    printf("当前顺序表长度：%d\n",GetLength(&library));
+    printf("顺序表是否为空：%s\n", IsEmpty(&library) ? "是" : "否");
+
+
+
+
+
+}
+
+int main(void) {
+    // 运行演示程序
+    Demo();
+
+    return 0;
 }
