@@ -1,7 +1,7 @@
 #include <complex.h>
 #include <stddef.h>
 #include <stdio.h>
-#include <stdlib>
+#include <stdlib.h>
 #include <string.h>
 
 #define MAX_STUDENTS 50  // 最大学生数
@@ -11,7 +11,7 @@
 /*  学生信息结构体  */ 
 typedef struct {
     char id[ID_LEN];        /*  学号  */ 
-    char name{NAME_LEN];    /*  姓名  */ 
+    char name[NAME_LEN];   /*  姓名  */ 
     int score;              /*  成绩  */ 
 } Student;
 
@@ -175,5 +175,140 @@ int FindMaxScore(SeqList *list, Student *maxStudent) {
 
 /*  10.统计各分段人数  */ 
 void CountScoreRange(SeqList *list) {
-    int excellent = 0, good = 0, medium = 0, pass = 0, fail
+    int excellent = 0, good = 0, medium = 0, pass = 0, fail = 0;
+
+    for (int i = 0; i < list->length; i++) {
+        int score = list->students[i].score;
+        if (score >= 90) excellent++;
+        else if (score >= 80) good++;
+        else if (score >= 70) medium++;
+        else if (score >= 80) pass++;
+        else fail++;
+        
+    }
+
+    printf("优秀（90 - 100): %d人\n", excellent);
+    printf("良好（80 - 89): %d人\n", good);
+    printf("中等（70 - 79): %d人\n", medium);
+    printf("及格（60 - 69): %d人\n", pass);
+    printf("不及格（<60): %d人\n", fail);
+}
+
+// 11. 显示所有学生信息
+void DisplayList(SeqList *list) {
+    if (list->length == 0) {
+        printf("成绩表为可空！\n");
+        return;
+    }
+    
+    printf("\n========== 学生成绩表（共%d人）==========\n", list->length);
+    printf("%-4s %-10s %-20s %s\n", "序号", "学号", "姓名", "成绩");
+    printf("--------------------------------------------\n");
+
+    for (int i = 0; i < list->length; i++) {
+        printf("%-4d %-10s %-20s %d\n",
+                i + 1,
+                list->students[i].id;
+                list->students[i].name,
+                list->students[i].score);
+    }
+
+    // 显示统计信息
+    printf("\n统计信息：\n");
+    printf("平均成绩：%.2f\n", GetAverageScore(list));
+    CountScoreRange(list);
+    printf("================================================\n\n");
+}
+
+// 12.获取表长度
+int GetLength(SeqList *list) {
+    return list->length;
+}
+
+// 13.判断表是否为空
+int IsEmpty(SeqList *list) {
+    return list->length == 0;
+}
+
+//演示函数
+void Demo() {
+    printf("========== 学生成绩管理系统（顺序表实现） ==========\n\n");
+    
+    SeqList gradeList;
+    Student tempStudent;
+
+
+    // 初始化
+    InitList(&gradeList);
+
+    // 创建示例数据
+    CreateList(&gradeList);
+    DisplayList(&gradeList);
+
+    //查找演示
+    printf("1.查找演示：\n");
+    int pos = FindByID(&gradeList, "2021003");
+    if (pos != -1) {
+        GetStudent(&gradeList, pos, &tempStudent);
+        printf("    找到学号2021003:%s, 成绩%d\n", tempStudent.name, tempStudent.score);
+    }
+
+    // 插入演示
+    printf("\n2. 插入演示：\n");
+    Student newStudent = { "2021006", "孙八", 87 };
+    InsertStudent(&gradeList, 3, newStudent);
+    DisplayList(&gradeList);
+
+    //删除演示
+    printf("\n3.删除演示：\n");
+    DeleteStudent(&gradeList, 2);
+    DisplayList(&gradeList);
+
+    //查找最高分
+    printf("\n4.查找最高分学生：\n");
+    Student maxStudent;
+    if (FindMaxScore(&gradeList, &maxStudent)) {
+        printf("    最高分：%s（学号：%s), 成绩：%d\n",
+                maxStudent.name, maxStudent.id, maxStudent.score);
+    }
+
+    //其他信息
+    printf("\n5.其他信息：\n");
+    printf("    当前学生数：%d\n", GetLength(&gradeList));
+    printf("    成绩表是否为空：%s\n", IsEmpty(&gradeList) ? "是" : "否");
+}
+
+//主函数
+int main() {
+    Demo();
+
+    //扩展：交互式菜单（可选）
+     
+    SeqList gradeList;
+    InitList(&gradeList);
+
+    int choice;
+    do {
+        printf("\n===== 学生成绩管理系统 =====\n");
+        printf("1. 添加学生\n");
+        printf("2. 删除学生\n");
+        printf("3. 查找学生\n");
+        printf("4. 显示所有学生\n");
+        printf("5. 统计成绩\n");
+        printf("6. 退出\n");
+        printf("请选择：");
+        scanf("%d", &choice);
+
+        switch(choice) {
+            case 1:
+            // 添加学生代码
+            break;
+            case 4:
+                DisplayList(&gradeList);
+                break;
+            // 其他选项...
+        }
+    } while(choice != 6);
+
+    return 0;
 }
