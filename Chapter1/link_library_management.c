@@ -62,7 +62,96 @@ int main() {
 
         switch (choice) {
             case 1:  //添加新图书
-                printf("\n"=== 添加
+                printf("\n=== 添加新图书 ===\n");
+                printf("请输入图书编号：");
+                scanf("%d", &id);
+
+                // 检查编号是否已存在
+                if (findBookById(&library, id) != NULL) {
+                    printf("错误：图书编号 %d 已存在！\n", id);
+                    break;
+                }
+
+                printf("请输入书名：\n");
+                getchar()  //消耗换行符
+                fgets(title, sizeof(title), stdin);
+                title[strcspn(title, "\n")] = '\0';  // 去除换行符
+                                                     
+                printf("请输入作者：");
+                fgets(author, sizeof(author), stdin);
+                author[strcspn(author, "\n")] = '\0';
+
+                printf("请输入作者：\n");
+                fgets(author, sizeof(author), stdin);
+                author[strcspn(author, "\n")] = '\0';
+
+                printf("请输入价格：");
+                scanf("%f", &price);
+
+                printf("请输入库存数量：");
+                scanf("%d", &quantity);
+
+                addBookAtTail(&library, createBook(id, title, author, price, quantity));
+
+                printf("图书添加成功！\n");
+                break;
+
+            case 2:  // 显示所有图书
+                printf("\n=== 图书馆所有图书 ===\n");
+                displayBooks(&library);
+                break;
+
+            case 3:  // 按编号查找图书
+                printf("\n=== 按编号查找图书 ===\n");
+                printf("请输入图书编号：\n");
+                scanf("%d", &id);
+
+                Book *foundBook = findBookById(&library, id);
+                if (foundBook != NULL) {
+                    printf("\n找到图书：\n");
+                    printf("编号：%d\n", foundBook->id);
+                    printf("书名：%s\n", foundBook->title);
+                    printf("作者：%s\n", foundBook->author);
+                    printf("价格：%.2f\n", foundBook->price);
+                    printf("库存：%d\n", foundBook->quantity);
+                } else {
+                    printf("未找到编号为 %d 的图书\n", id);
+                }
+                break;
+
+            case 4:  // 按书名查找图书
+                printf("\n=== 按书名查找图书 ===\n");
+                printf("请输入书名：");
+                getchar();
+                fgets(title, sizeof(title), stdin);
+                title[strcspn(title, "\n")] = '\0';
+
+                foundBook = findBookByTitle(library, title);
+                if (foundBook != NULL) {
+                    printf("\n找到图书：\n");
+                    printf("编号：%d\n", foundBook->id);
+                    printf("书名：%s\n", foundBook->title);
+                    printf("作者：%s\n", foundBook->author);
+                    printf("价格：%.2f\n", foundBook->price);
+                    printf("库存：%d\n", foundBook->quantity);
+                } else {
+                    printf("未找到书名为'%s' 的图书\n", title);
+                }
+                break;
+
+            case 5:  // 删除图书
+                printf("\n=== 删除图书 ===\n");
+                printf("请输入要删除的图书编号：");
+                scanf("%d", id);
+
+                if (deleteBookBYId(&library, id)) {
+                    printf("图书删除成功！\n");
+                } else {
+                    printf("删除失败，未找到编号为 %d 的图书\n", id);
+                } break;
+
+            case 6:
+
         }
     }
 }
