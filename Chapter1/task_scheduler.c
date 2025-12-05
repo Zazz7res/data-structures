@@ -106,5 +106,97 @@ bool removeTask(TaskScheduler* scheduler, int taskId) {
         // 只有一个节点的情况
         scheduler->current = NULL;
 
+    } else {
+        if (prev == NULL) {
+            TaskNode* temp = current;
+            while (temp->next != current) {
+                temp = temp->next;
+            }
+            prev = temp;
+        }
+
+        prev->next = current->next;
+
+        // 如果删除的是当前指向的节点，更新current
+        if (current == scheduler->current) {
+            scheduler->current = current->next;
+        }
     }
+
+    printf("任务 [%d] %s 已从调度器移除\n", current->taskId, current->taskName);
+    free(current);
+    scheduler->taskCount--;
+
+    return true;
+}
+
+// 执行当前任务，并移到下一个任务
+void executeCurrentTask(TaskScheduler* scheduler) {
+    if (scheduler->current == NULL) {
+        printf("调度器中无任务可执行！\n");
+        return;
+    }
+
+    TaskNode* currentTask = scheduler->current;
+
+    printf("正在执行任务：[ID: %d] %s\n", 
+            currentTask-taskId,
+            currentTask->taskName);
+    printf("    优先级：%d, 执行时间：%dms\n",
+            currentTask->priority,
+            currentTask->executionTime);
+
+    // 模拟任务执行
+    printf("    任务执行中");
+    for (int i = 0; i < 3; i++) {
+        printf(".");
+        fflush(stdout);
+        // 简单的延时模拟（实际中不要这样实现延时）
+        for (int j = 0; j < 100000000; j++) {
+        } 
+        printf("    完成！\n");
+
+        // 移到下一个任务
+        scheduler->current = scheduler->current->next;
+    }
+
+// 显示所有任务（从当前任务开始i）
+void displayAllTasks(TaskScheduler* scheduler) {
+    if (scheduler->current == NULL) {
+        printf("调度器中无任务！\n");
+        return;
+    }
+
+    printf("\n当前调度器中的任务（共%d个）:\n", scheduler->taskCount);
+    printf("┌─────┬────────────────────┬─────────────┬──────────┐\n");
+    printf("│ ID  │ 任务名称           │ 执行时间(ms)│ 优先级   │\n");
+    printf("├─────┼────────────────────┼─────────────┼──────────┤\n");
+
+    TaskNode* start = scheduler->current;
+    TaskNode* current = start;
+    int count = 0;
+
+    do {
+        printf("| %-3d | %-18s | %-11d | %-8d |\n",
+                current->taskId,
+                current->taskName,
+                current->executionTime,
+                current->priority;
+
+            // 标记当前指向的任务
+            if (current == start) {
+                printf("│     ↑ 当前指向的任务                             │\n");
+                
+            }
+
+            current = current->next;
+            count++;
+
+            // 防止无限循环（安全措施）
+            if (count > scheduler->taskCount * 2) {
+                printf("错误：检测到循环链表异常！\n");
+                break;
+            }
+    }
+}
 }
