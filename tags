@@ -1,29 +1,16 @@
-!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
-!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
-!_TAG_OUTPUT_EXCMD	mixed	/number, pattern, mixed, or combineV2/
-!_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
-!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
-!_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
-!_TAG_PROC_CWD	/home/harry/data-structures/	//
-!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
-!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
-!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
-!_TAG_PROGRAM_VERSION	5.9.0	//
-AUTHOR_NAME_LEN	Chapter1/顺序表.c	/^#define AUTHOR_NAME_LEN /;"	d	file:
-BOOK	Chapter1/顺序表.c	/^}BOOK;$/;"	t	typeref:struct:__anon17b0f8800308	file:
-BOOK_NAME_LEN	Chapter1/顺序表.c	/^#define BOOK_NAME_LEN /;"	d	file:
-CreateList	Chapter1/顺序表.c	/^void CreateList(SeqList *List) $/;"	f	typeref:typename:void
-FinByID	Chapter1/顺序表.c	/^int FinByID(SeqList *list, int id)$/;"	f	typeref:typename:int
-FindByName	Chapter1/顺序表.c	/^int FindByName(SeqList *list, const char *name)$/;"	f	typeref:typename:int
-GetBook	Chapter1/顺序表.c	/^GetBook(SeqList *list, int position, Book *book)$/;"	f	typeref:typename:int
-InitList	Chapter1/顺序表.c	/^void InitList(SeqList *list) $/;"	f	typeref:struct:__anon17b0f8800408 void
-InsertBook	Chapter1/顺序表.c	/^int InsertBook(SeqList *list, int position, Book newBook) {$/;"	f	typeref:typename:int
-InsertBook	Chapter1/顺序表.c	/^int InsertBook(SeqList *list, int position, Book newBook)$/;"	f	typeref:typename:int
-MAX_SIZE	Chapter1/顺序表.c	/^#define MAX_SIZE /;"	d	file:
-__anon17b0f8800308	Chapter1/顺序表.c	/^{$/;"	s	file:
-__anon17b0f8800408	Chapter1/顺序表.c	/^{$/;"	s	file:
-author	Chapter1/顺序表.c	/^    char author[AUTHOR_NAME_LEN];       \/\/ 作者$/;"	m	struct:__anon17b0f8800308	typeref:typename:char[]	file:
-books	Chapter1/顺序表.c	/^    Book books[MAX_SIZE];   \/\/  存储图书的数组$/;"	m	struct:__anon17b0f8800408	typeref:typename:Book[]	file:
-id	Chapter1/顺序表.c	/^    int id;                             \/\/图书ID$/;"	m	struct:__anon17b0f8800308	typeref:typename:int	file:
-length	Chapter1/顺序表.c	/^    int length;             \/\/  当前顺序表的长度（实际元素个数）$/;"	m	struct:__anon17b0f8800408	typeref:typename:int	file:
-name	Chapter1/顺序表.c	/^    char name[BOOK_NAME_LEN];           \/\/ 图书名称 $/;"	m	struct:__anon17b0f8800308	typeref:typename:char[]	file:
+TaskNode	Chapter1/task_scheduler.c	/^typedef struct TaskNode {$/;"	s	file:
+TaskNode	Chapter1/task_scheduler.c	/^} TaskNode;$/;"	t	typeref:struct:TaskNode	file:
+TaskScheduler	Chapter1/task_scheduler.c	/^} TaskScheduler;$/;"	t	typeref:struct:__anonfaee0a6e0208	file:
+__anonfaee0a6e0208	Chapter1/task_scheduler.c	/^typedef struct {$/;"	s	file:
+addTask	Chapter1/task_scheduler.c	/^void addTask(TaskScheduler* scheduler, TaskNode* newTask) {$/;"	f	typeref:typename:void
+createTask	Chapter1/task_scheduler.c	/^TaskNode* createTask(int id, const char* name, int time, int priority) {$/;"	f	typeref:typename:TaskNode *
+current	Chapter1/task_scheduler.c	/^    TaskNode* current;          \/\/ 当前指向的任务$/;"	m	struct:__anonfaee0a6e0208	typeref:typename:TaskNode *	file:
+executeCurrentTask	Chapter1/task_scheduler.c	/^void executeCurrentTask(TaskScheduler* scheduler) {$/;"	f	typeref:typename:void
+executionTime	Chapter1/task_scheduler.c	/^    int executionTime;          \/\/ 执行时间（毫秒）$/;"	m	struct:TaskNode	typeref:typename:int	file:
+initScheduler	Chapter1/task_scheduler.c	/^void initScheduler(TaskScheduler* scheduler) {$/;"	f	typeref:typename:void
+next	Chapter1/task_scheduler.c	/^    struct TaskNode* next;      \/\/ 指向下一个任务$/;"	m	struct:TaskNode	typeref:struct:TaskNode *	file:
+priority	Chapter1/task_scheduler.c	/^    int priority;               \/\/ 优先级$/;"	m	struct:TaskNode	typeref:typename:int	file:
+removeTask	Chapter1/task_scheduler.c	/^bool removeTask(TaskScheduler* scheduler, int taskId) {$/;"	f	typeref:typename:bool
+taskCount	Chapter1/task_scheduler.c	/^    int taskCount;              \/\/ 任务总数$/;"	m	struct:__anonfaee0a6e0208	typeref:typename:int	file:
+taskId	Chapter1/task_scheduler.c	/^    int taskId;                 \/\/ 任务ID $/;"	m	struct:TaskNode	typeref:typename:int	file:
+taskName	Chapter1/task_scheduler.c	/^    char taskName[50];          \/\/ 任务名称$/;"	m	struct:TaskNode	typeref:typename:char[50]	file:
