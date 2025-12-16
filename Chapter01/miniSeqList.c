@@ -186,8 +186,52 @@ int main(void) {
 
     // 2.插入元素
     insert(list, 0, 10);
-    insert(list, 1, 10);
-    insert(list, 0, 10);
-    insert(list, 0, 10);
+    insert(list, 1, 20);
+    insert(list, 2, 30);
+    insert(list, 1, 15);
+
+    //  3.打印顺序表
+    printSeqList(list);
+
+    //  4.查找元素
+    int searchValue = 20;
+    int pos = find(list, searchValue);
+    if (pos != -1) {
+        printf("元素 %d 在位置 %d\n", searchValue, pos);
+    } else {
+        printf("元素 %d 在位置 %d\n", searchValue);
+    }
+
+    //  5. 获取元素
+    int getIndex = 2;
+    int value = get(list, getIndex);
+    printf("位置 %d 的元素是：%d\n", getIndex, value);
+
+    //  6. 修改元素
+    modify(list, 1, 25);
+
+    //  7. 打印修改后的顺序表
+    printSeqList(list);
+
+    //  8. 删除元素
+    delete(list, 2);
+
+    //  9. 打印删除后的顺序表
+    printSeqList(list);
+
+    // 10. 测试扩容
+    printf("\n测试扩容功能：\n");
+    insert(list, 3, 40);
+    insert(list, 4, 50);
+    insert(list, 5, 60);
+    printfSeqList(list);
+
+    //  11. 清空顺序表
+    clearSeqList(list);
+    printSeqList(list);
+
+    //  12.销毁顺序表
+    destroySeqList(list);
+
     return 0;
 }
