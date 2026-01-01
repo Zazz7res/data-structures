@@ -1,16 +1,140 @@
-TaskNode	Chapter1/task_scheduler.c	/^typedef struct TaskNode {$/;"	s	file:
-TaskNode	Chapter1/task_scheduler.c	/^} TaskNode;$/;"	t	typeref:struct:TaskNode	file:
-TaskScheduler	Chapter1/task_scheduler.c	/^} TaskScheduler;$/;"	t	typeref:struct:__anonfaee0a6e0208	file:
-__anonfaee0a6e0208	Chapter1/task_scheduler.c	/^typedef struct {$/;"	s	file:
-addTask	Chapter1/task_scheduler.c	/^void addTask(TaskScheduler* scheduler, TaskNode* newTask) {$/;"	f	typeref:typename:void
-createTask	Chapter1/task_scheduler.c	/^TaskNode* createTask(int id, const char* name, int time, int priority) {$/;"	f	typeref:typename:TaskNode *
-current	Chapter1/task_scheduler.c	/^    TaskNode* current;          \/\/ 当前指向的任务$/;"	m	struct:__anonfaee0a6e0208	typeref:typename:TaskNode *	file:
-executeCurrentTask	Chapter1/task_scheduler.c	/^void executeCurrentTask(TaskScheduler* scheduler) {$/;"	f	typeref:typename:void
-executionTime	Chapter1/task_scheduler.c	/^    int executionTime;          \/\/ 执行时间（毫秒）$/;"	m	struct:TaskNode	typeref:typename:int	file:
-initScheduler	Chapter1/task_scheduler.c	/^void initScheduler(TaskScheduler* scheduler) {$/;"	f	typeref:typename:void
-next	Chapter1/task_scheduler.c	/^    struct TaskNode* next;      \/\/ 指向下一个任务$/;"	m	struct:TaskNode	typeref:struct:TaskNode *	file:
-priority	Chapter1/task_scheduler.c	/^    int priority;               \/\/ 优先级$/;"	m	struct:TaskNode	typeref:typename:int	file:
-removeTask	Chapter1/task_scheduler.c	/^bool removeTask(TaskScheduler* scheduler, int taskId) {$/;"	f	typeref:typename:bool
-taskCount	Chapter1/task_scheduler.c	/^    int taskCount;              \/\/ 任务总数$/;"	m	struct:__anonfaee0a6e0208	typeref:typename:int	file:
-taskId	Chapter1/task_scheduler.c	/^    int taskId;                 \/\/ 任务ID $/;"	m	struct:TaskNode	typeref:typename:int	file:
-taskName	Chapter1/task_scheduler.c	/^    char taskName[50];          \/\/ 任务名称$/;"	m	struct:TaskNode	typeref:typename:char[50]	file:
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_EXCMD	mixed	/number, pattern, mixed, or combineV2/
+!_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
+!_TAG_PROC_CWD	/home/harry/data-structures/	//
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	5.9.0	//
+AUTHOR_NAME_LEN	Chapter02/SeqList.c	/^#define AUTHOR_NAME_LEN /;"	d	file:
+BOOK_NAME_LEN	Chapter02/SeqList.c	/^#define BOOK_NAME_LEN /;"	d	file:
+Book	Chapter02/SeqList.c	/^}Book;$/;"	t	typeref:struct:__anon8bf784d30108	file:
+Book	Chapter02/link_library_management.c	/^typedef struct Book {$/;"	s	file:
+Book	Chapter02/link_library_management.c	/^} Book;$/;"	t	typeref:struct:Book	file:
+BookList	Chapter02/link_library_management.c	/^} BookList;$/;"	t	typeref:struct:__anonac81202c0108	file:
+CountScoreRange	Chapter02/student_grade_system.c	/^void CountScoreRange(SeqList *list) {$/;"	f	typeref:typename:void
+CreateList	Chapter02/SeqList.c	/^void CreateList(SeqList *list) {$/;"	f	typeref:typename:void
+CreateList	Chapter02/student_grade_system.c	/^void CreateList(SeqList *list) {$/;"	f	typeref:typename:void
+DeleteBook	Chapter02/SeqList.c	/^int DeleteBook(SeqList *list, int position) {$/;"	f	typeref:typename:int
+DeleteStudent	Chapter02/student_grade_system.c	/^int DeleteStudent(SeqList *list, int position) {$/;"	f	typeref:typename:int
+Demo	Chapter02/SeqList.c	/^void Demo() {$/;"	f	typeref:typename:void
+Demo	Chapter02/student_grade_system.c	/^void Demo() {$/;"	f	typeref:typename:void
+DisplayList	Chapter02/SeqList.c	/^void DisplayList(SeqList *list) {$/;"	f	typeref:typename:void
+DisplayList	Chapter02/student_grade_system.c	/^void DisplayList(SeqList *list) {$/;"	f	typeref:typename:void
+FindByID	Chapter02/SeqList.c	/^int FindByID(SeqList *list, int id) {$/;"	f	typeref:typename:int
+FindByID	Chapter02/student_grade_system.c	/^int FindByID(SeqList *list, const char *id) {$/;"	f	typeref:typename:int
+FindByName	Chapter02/SeqList.c	/^int FindByName(SeqList *list, const char *name) {$/;"	f	typeref:typename:int
+FindByName	Chapter02/student_grade_system.c	/^int FindByName(SeqList *list, const char *name) {$/;"	f	typeref:typename:int
+FindMaxScore	Chapter02/student_grade_system.c	/^int FindMaxScore(SeqList *list, Student *maxStudent) {$/;"	f	typeref:typename:int
+GetAverageScore	Chapter02/student_grade_system.c	/^float GetAverageScore(SeqList *list) {$/;"	f	typeref:typename:float
+GetBook	Chapter02/SeqList.c	/^int GetBook(SeqList *list, int position, Book *book) {$/;"	f	typeref:typename:int
+GetLength	Chapter02/SeqList.c	/^int GetLength(SeqList *list) {$/;"	f	typeref:typename:int
+GetLength	Chapter02/student_grade_system.c	/^int GetLength(SeqList *list) {$/;"	f	typeref:typename:int
+GetStudent	Chapter02/student_grade_system.c	/^int GetStudent(SeqList *list, int position, Student *student) {$/;"	f	typeref:typename:int
+ID_LEN	Chapter02/student_grade_system.c	/^#define ID_LEN /;"	d	file:
+INCREMENT_SIZE	Chapter02/SeqList_v2.c	/^#define INCREMENT_SIZE /;"	d	file:
+INIT_SIZE	Chapter02/SeqList_v2.c	/^#define INIT_SIZE /;"	d	file:
+InitList	Chapter02/SeqList.c	/^void InitList(SeqList *list) {$/;"	f	typeref:typename:void
+InitList	Chapter02/student_grade_system.c	/^void InitList(SeqList *list) {$/;"	f	typeref:typename:void
+InsertBook	Chapter02/SeqList.c	/^int InsertBook(SeqList *list, int position, Book newBook) {$/;"	f	typeref:typename:int
+InsertStudent	Chapter02/student_grade_system.c	/^int InsertStudent(SeqList *list, int position, Student student) {$/;"	f	typeref:typename:int
+IsEmpty	Chapter02/SeqList.c	/^int IsEmpty(SeqList *list) {$/;"	f	typeref:typename:int
+IsEmpty	Chapter02/student_grade_system.c	/^int IsEmpty(SeqList *list) {$/;"	f	typeref:typename:int
+MAX_SIZE	Chapter02/SeqList.c	/^#define MAX_SIZE /;"	d	file:
+MAX_STUDENTS	Chapter02/student_grade_system.c	/^#define MAX_STUDENTS /;"	d	file:
+NAME_LEN	Chapter02/student_grade_system.c	/^#define NAME_LEN /;"	d	file:
+SeqList	Chapter02/SeqList.c	/^} SeqList;$/;"	t	typeref:struct:__anon8bf784d30208	file:
+SeqList	Chapter02/SeqList_v2.c	/^} SeqList;$/;"	t	typeref:struct:__anon68eeaeda0108	file:
+SeqList	Chapter02/miniSeqList.c	/^} SeqList;$/;"	t	typeref:struct:__anon3d02bc800208	file:
+SeqList	Chapter02/student_grade_system.c	/^} SeqList;$/;"	t	typeref:struct:__anond212523b0208	file:
+Student	Chapter02/student_grade_system.c	/^} Student;$/;"	t	typeref:struct:__anond212523b0108	file:
+TaskNode	Chapter02/task_scheduler.c	/^typedef struct TaskNode {$/;"	s	file:
+TaskNode	Chapter02/task_scheduler.c	/^} TaskNode;$/;"	t	typeref:struct:TaskNode	file:
+TaskScheduler	Chapter02/task_scheduler.c	/^} TaskScheduler;$/;"	t	typeref:struct:__anon8de32a3f0108	file:
+__anon3d02bc800208	Chapter02/miniSeqList.c	/^typedef struct {$/;"	s	file:
+__anon68eeaeda0108	Chapter02/SeqList_v2.c	/^typedef struct {$/;"	s	file:
+__anon8bf784d30108	Chapter02/SeqList.c	/^typedef struct {$/;"	s	file:
+__anon8bf784d30208	Chapter02/SeqList.c	/^typedef struct {$/;"	s	file:
+__anon8de32a3f0108	Chapter02/task_scheduler.c	/^typedef struct {$/;"	s	file:
+__anonac81202c0108	Chapter02/link_library_management.c	/^typedef struct {$/;"	s	file:
+__anond212523b0108	Chapter02/student_grade_system.c	/^typedef struct {$/;"	s	file:
+__anond212523b0208	Chapter02/student_grade_system.c	/^typedef struct {$/;"	s	file:
+addBook	Chapter02/link_library_management.c	/^void addBook(BookList *list, Book *newBook) {$/;"	f	typeref:typename:void
+addBookAtHead	Chapter02/link_library_management.c	/^void addBookAtHead(BookList *list, Book *newBook) {$/;"	f	typeref:typename:void
+addBookAtTail	Chapter02/link_library_management.c	/^void addBookAtTail(BookList *list, Book *newBook) {$/;"	f	typeref:typename:void
+addTask	Chapter02/task_scheduler.c	/^void addTask(TaskScheduler* scheduler, TaskNode* newTask) {$/;"	f	typeref:typename:void
+author	Chapter02/SeqList.c	/^    char author[AUTHOR_NAME_LEN];   \/\/  作者$/;"	m	struct:__anon8bf784d30108	typeref:typename:char[]	file:
+author	Chapter02/link_library_management.c	/^    char author[50];    \/\/ 作者$/;"	m	struct:Book	typeref:typename:char[50]	file:
+books	Chapter02/SeqList.c	/^    Book books[MAX_SIZE];  \/\/  存储图书的数组$/;"	m	struct:__anon8bf784d30208	typeref:typename:Book[]	file:
+capacity	Chapter02/SeqList_v2.c	/^    int capacity;   \/\/ 当前顺序表的总容量$/;"	m	struct:__anon68eeaeda0108	typeref:typename:int	file:
+capacity	Chapter02/miniSeqList.c	/^    int capacity;$/;"	m	struct:__anon3d02bc800208	typeref:typename:int	file:
+clearScheduler	Chapter02/task_scheduler.c	/^void clearScheduler(TaskScheduler* scheduler) {$/;"	f	typeref:typename:void
+count	Chapter02/link_library_management.c	/^    int count;          \/\/ 图书数量$/;"	m	struct:__anonac81202c0108	typeref:typename:int	file:
+createBook	Chapter02/link_library_management.c	/^Book* createBook(int id, const char *title, const char *author, float price, int quantity) {$/;"	f	typeref:typename:Book *
+createTask	Chapter02/task_scheduler.c	/^TaskNode* createTask(int id, const char* name, int time, int priority) {$/;"	f	typeref:typename:TaskNode *
+current	Chapter02/task_scheduler.c	/^    TaskNode* current;           \/\/ 当前指向的任务$/;"	m	struct:__anon8de32a3f0108	typeref:typename:TaskNode *	file:
+data	Chapter02/SeqList_v2.c	/^    int *data;      \/\/ 指针，指向存放数据的动态数组$/;"	m	struct:__anon68eeaeda0108	typeref:typename:int *	file:
+data	Chapter02/miniSeqList.c	/^    int *data;$/;"	m	struct:__anon3d02bc800208	typeref:typename:int *	file:
+delete	Chapter02/miniSeqList.c	/^int delete(SeqList *list, int index) {$/;"	f	typeref:typename:int
+deleteBookById	Chapter02/link_library_management.c	/^bool deleteBookById(BookList *list, int id) {$/;"	f	typeref:typename:bool
+demonstrateScheduler	Chapter02/task_scheduler.c	/^void demonstrateScheduler() {$/;"	f	typeref:typename:void
+destroySeqList	Chapter02/miniSeqList.c	/^void destroySeqList(SeqList *list) {$/;"	f	typeref:typename:void
+displayAllTasks	Chapter02/task_scheduler.c	/^void displayAllTasks(TaskScheduler* scheduler) {$/;"	f	typeref:typename:void
+displayBooks	Chapter02/link_library_management.c	/^void displayBooks(const BookList *list) {$/;"	f	typeref:typename:void
+displayMenu	Chapter02/link_library_management.c	/^void displayMenu() {$/;"	f	typeref:typename:void
+executeCurrentTask	Chapter02/task_scheduler.c	/^void executeCurrentTask(TaskScheduler* scheduler) {$/;"	f	typeref:typename:void
+executionTime	Chapter02/task_scheduler.c	/^    int executionTime;           \/\/ 执行时间（毫秒）$/;"	m	struct:TaskNode	typeref:typename:int	file:
+expandSeqList	Chapter02/miniSeqList.c	/^int expandSeqList(Seqlist *list, int newCapacity) {$/;"	f	typeref:typename:int
+find	Chapter02/miniSeqList.c	/^ int find(SeqList *list, int value) {$/;"	f	typeref:typename:int
+findBookById	Chapter02/link_library_management.c	/^Book* findBookById(const BookList *list, int id) {$/;"	f	typeref:typename:Book *
+findBookByTitle	Chapter02/link_library_management.c	/^Book* findBookByTitle(const BookList *list, const char *title) {$/;"	f	typeref:typename:Book *
+findTask	Chapter02/task_scheduler.c	/^TaskNode* findTask(TaskScheduler* scheduler, int taskId) {$/;"	f	typeref:typename:TaskNode *
+freeBookList	Chapter02/link_library_management.c	/^void freeBookList(BookList *list) {$/;"	f	typeref:typename:void
+get	Chapter02/miniSeqList.c	/^int get(SeqList *list, int index) {$/;"	f	typeref:typename:int
+getBookCount	Chapter02/link_library_management.c	/^int getBookCount(const BookList *list) {$/;"	f	typeref:typename:int
+getLength	Chapter02/miniSeqList.c	/^int getLength(SeqList *list) {$/;"	f	typeref:typename:int
+head	Chapter02/link_library_management.c	/^    Book *head;         \/\/ 链表头指针$/;"	m	struct:__anonac81202c0108	typeref:typename:Book *	file:
+id	Chapter02/SeqList.c	/^    int id;         \/\/  图书ID $/;"	m	struct:__anon8bf784d30108	typeref:typename:int	file:
+id	Chapter02/link_library_management.c	/^    int id;             \/\/ 图书编号$/;"	m	struct:Book	typeref:typename:int	file:
+id	Chapter02/student_grade_system.c	/^    char id[ID_LEN];         \/\/ 学号$/;"	m	struct:__anond212523b0108	typeref:typename:char[]	file:
+initBookList	Chapter02/link_library_management.c	/^void initBookList(BookList *list) {$/;"	f	typeref:typename:void
+initScheduler	Chapter02/task_scheduler.c	/^void initScheduler(TaskScheduler* scheduler) {$/;"	f	typeref:typename:void
+initSeqList	Chapter02/miniSeqList.c	/^SeqList* initSeqList(int capacity) {$/;"	f	typeref:typename:SeqList *
+insert	Chapter02/miniSeqList.c	/^int insert(SeqList *list, int index, int value) {$/;"	f	typeref:typename:int
+isEmpty	Chapter02/miniSeqList.c	/^int isEmpty(SeqList *list) {$/;"	f	typeref:typename:int
+isFull	Chapter02/miniSeqList.c	/^int isFull(SeqList *list) {$/;"	f	typeref:typename:int
+length	Chapter02/SeqList.c	/^    int length;           \/\/  当前顺序表的长度（实际元素个数）$/;"	m	struct:__anon8bf784d30208	typeref:typename:int	file:
+length	Chapter02/SeqList_v2.c	/^    int length;     \/\/ 当前顺序表的长度（即元素的个数）$/;"	m	struct:__anon68eeaeda0108	typeref:typename:int	file:
+length	Chapter02/miniSeqList.c	/^    int length;$/;"	m	struct:__anon3d02bc800208	typeref:typename:int	file:
+length	Chapter02/student_grade_system.c	/^    int length;                      \/\/ 当前学生数$/;"	m	struct:__anond212523b0208	typeref:typename:int	file:
+loadFromFile	Chapter02/link_library_management.c	/^void loadFromFile(BookList *list, const char *filename) {$/;"	f	typeref:typename:void
+main	Chapter02/SeqList.c	/^int main(void) {$/;"	f	typeref:typename:int
+main	Chapter02/SeqList_v2.c	/^int main(void)$/;"	f	typeref:typename:int
+main	Chapter02/link_library_management.c	/^int main() {$/;"	f	typeref:typename:int
+main	Chapter02/student_grade_system.c	/^int main() {$/;"	f	typeref:typename:int
+main	Chapter02/task_scheduler.c	/^int main() {$/;"	f	typeref:typename:int
+modify	Chapter02/miniSeqList.c	/^int modify(SeqList *list, int index, int newValue) {$/;"	f	typeref:typename:int
+name	Chapter02/SeqList.c	/^    char name[BOOK_NAME_LEN];       \/\/  图书名称$/;"	m	struct:__anon8bf784d30108	typeref:typename:char[]	file:
+name	Chapter02/student_grade_system.c	/^    char name[NAME_LEN];     \/\/ 姓名$/;"	m	struct:__anond212523b0108	typeref:typename:char[]	file:
+next	Chapter02/link_library_management.c	/^    struct Book *next;  \/\/ 指向下一本书的指针$/;"	m	struct:Book	typeref:struct:Book *	file:
+next	Chapter02/task_scheduler.c	/^    struct TaskNode* next;       \/\/ 指向下一个任务$/;"	m	struct:TaskNode	typeref:struct:TaskNode *	file:
+price	Chapter02/link_library_management.c	/^    float price;        \/\/ 价格$/;"	m	struct:Book	typeref:typename:float	file:
+printSeqList	Chapter02/miniSeqList.c	/^void printSeqList(SeqList *list) {$/;"	f	typeref:typename:void
+priority	Chapter02/task_scheduler.c	/^    int priority;                \/\/ 优先级$/;"	m	struct:TaskNode	typeref:typename:int	file:
+quantity	Chapter02/link_library_management.c	/^    int quantity;       \/\/ 库存数量$/;"	m	struct:Book	typeref:typename:int	file:
+removeTask	Chapter02/task_scheduler.c	/^bool removeTask(TaskScheduler* scheduler, int taskId) {$/;"	f	typeref:typename:bool
+saveToFile	Chapter02/link_library_management.c	/^void saveToFile(const BookList *list, const char *filename) {$/;"	f	typeref:typename:void
+score	Chapter02/student_grade_system.c	/^    int score;               \/\/ 成绩$/;"	m	struct:__anond212523b0108	typeref:typename:int	file:
+sortBooksById	Chapter02/link_library_management.c	/^void sortBooksById(BookList *list) {$/;"	f	typeref:typename:void
+sortTasksByPriority	Chapter02/task_scheduler.c	/^void sortTasksByPriority(TaskScheduler* scheduler) {$/;"	f	typeref:typename:void
+students	Chapter02/student_grade_system.c	/^    Student students[MAX_STUDENTS];  \/\/ 学生数组$/;"	m	struct:__anond212523b0208	typeref:typename:Student[]	file:
+tail	Chapter02/link_library_management.c	/^    Book *tail;         \/\/ 链表尾指针（方便尾插）$/;"	m	struct:__anonac81202c0108	typeref:typename:Book *	file:
+taskCount	Chapter02/task_scheduler.c	/^    int taskCount;               \/\/ 任务总数$/;"	m	struct:__anon8de32a3f0108	typeref:typename:int	file:
+taskId	Chapter02/task_scheduler.c	/^    int taskId;                  \/\/ 任务ID$/;"	m	struct:TaskNode	typeref:typename:int	file:
+taskName	Chapter02/task_scheduler.c	/^    char taskName[50];           \/\/ 任务名称$/;"	m	struct:TaskNode	typeref:typename:char[50]	file:
+title	Chapter02/link_library_management.c	/^    char title[100];    \/\/ 书名$/;"	m	struct:Book	typeref:typename:char[100]	file:
+updateBookQuantity	Chapter02/link_library_management.c	/^void updateBookQuantity(BookList *list, int id, int newQuantity) {$/;"	f	typeref:typename:void
+year	Chapter02/SeqList.c	/^    int year;       \/\/  出版年份$/;"	m	struct:__anon8bf784d30108	typeref:typename:int	file:
