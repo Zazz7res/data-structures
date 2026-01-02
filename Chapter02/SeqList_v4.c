@@ -18,7 +18,7 @@ typedef struct {
 typedef struct {
     Book *data;             //  指向动态数组的指针（存放书的地方）
     int length;             //  当前书架上有多少本书
-    int capacity            //  书架最大能放多少本书
+    int capacity;            //  书架最大能放多少本书
 } SqList; //  Sequence List
 
 //  ==========================================
@@ -106,7 +106,7 @@ void UpdateBook(SqList *L, int id, float newPrice) {
         printf(">> 错误：找不到ID 为 %d 的书\n", id);
         return ;
     }
-    L-data[index].price = newPrice;
+    L->data[index].price = newPrice;
     printf(">> 修改成功: 《%s》价格已经更新为 %.2f\n", L->data[index].name, newPrice);
 }
 
@@ -120,7 +120,7 @@ void RemoveBook(SqList *L, int id) {
 
     //  核心逻辑：从删除位置开始，后面所有的书都往前挪一格
     for (int i = index; i < L->length - 1; i++) {
-        L->data[i] = L-data[i + 1];
+        L->data[i] = L->data[i + 1];
     }
 
     L->length--;  //总数减1 
@@ -129,7 +129,7 @@ void RemoveBook(SqList *L, int id) {
 
 //  销毁书架（释放内存）
 void DestroyList(SqList *L) {
-    free(L-data);
+        free(L->data);
     L->data = NULL;
     L->length = 0;
     L->capacity = 0;
@@ -148,15 +148,46 @@ int main(void) {
 
     // 2. 准备一些新书数据
     Book b1 = {101, "C语言程序设计", "谭浩强", 45.00};
-    Book b1 = {102, "数据结构", "严蔚敏", 55.50};
-    Book b1 = {103, "红楼梦", "曹雪芹", 89.00};
-    Book b1 = {104, "三体", "刘慈欣", 93.00};
+    Book b2 = {102, "数据结构", "严蔚敏", 55.50};
+    Book b3 = {103, "红楼梦", "曹雪芹", 89.00};
+    Book b4 = {104, "三体", "刘慈欣", 93.00};
 
     // 3. 新书入库（测试插入和自动扩容）
-    printf("\n--- 正在入库 ---"\n);
+    printf("\n--- 正在入库 ---\n");
     AddBook(&library, b1);
     AddBook(&library, b2);
     AddBook(&library, b3);
-    AddBook(&library, b4);  //      
+    AddBook(&library, b4);  //      此时书架已满（容量4）
+
+    //  5本：触发扩容测试
+    Book b5 = {105, "活着", "余华", 28.00};
+    AddBook(&library, b5);  //  触发扩容
+
+    PrintList(library);
+
+    //  4. 查书测试
+    printf("--- 正在查书 ---\n");
+    int searchId = 102;
+    int idx = FindBookById(library, searchId);
+    if (idx != -1) {
+        printf(">> 找到了：%s （位置：第%d个)\n", library.data[idx].name, idx + 1);
+    } else {
+        printf(">> 未找到 ID 为 %d 的书\n", searchId);
+    }
+
+    //  5. 改价格测试
+    printf("\n--- 正在改价 ---\n");
+    UpdateBook(&library, 101, 39.99);  //  C语言打折了
+    PrintList(library);
+
+    //  6. 下架书籍测试
+    printf("\n--- 正在下架 ---\n");
+    RemoveBook(&library, 103);  //  卖掉红楼梦
+    PrintList(library);
+
+    //  7. 关门
+    DestroyList(&library);
+
+    return 0;
 }
 
