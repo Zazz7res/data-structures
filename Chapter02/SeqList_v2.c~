@@ -61,50 +61,8 @@ void PushFront(LinkList *L, Student s) {
 } 
 
 //  尾插法：新来的排最后
-void PushBack(LinkList *L, Student s) {
-    //  1. 申请盒子
-    Node *newNode = (Node *)malloc(sizeof(Node));
-    newNode->data = s;
-    newNode->next = NULL;       //  既然是尾巴，后面肯定是空的
+void PushBack(LinkList *L, Student s) {}
 
-    //  2. 特判：如果是空链表
-    if (*L == NULL) {
-        *L = newNode;           //  直接让头指针指向它
-        return;
-    }
-
-    //  3. 找尾巴：需要遍历
-    Node *p = *L;
-    while (p->next != NULL) {
-        //  只要 p 的后面还有东西，就不是尾巴
-        p = p->next;            //  往后挪
-    }
-
-    //  4. 此时 p 就是尾巴，把新节点挂上去
-    p->next = newNode;
-}
-
-//  ======================== 第四节  把学号删除  ==========================
-//  按学号删除学生
-bool DeleteById(LinkList *L, int id) {
-    //  1.  链表空了没法删除
-    if (*L == NULL) {
-        return false;
-    }
-
-    //  2. 定义了两个指针
-    Node *p = *L;               //  p 是当前检查的节点
-    Node *prev = NULL;          //  prev 是 p 的前一个节点（前驱）
-
-    //  3. 开始遍历找人
-    while (p != NULL && p->data.id != id) {
-        prev = p;               //  记住当前位置，准备往后挪
-        p = p->next;            //  往后挪
-    }
-
-    //  4. 跳出
-    
-}
 
 
 
