@@ -1,3 +1,5 @@
+
+#include <complex.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -18,6 +20,9 @@ typedef struct Node {
     struct Node *next;              //  指向下一个节点的指针
 } Node, *LinkList;
 
+LinkList InitList() {
+    return NULL;
+}
 //  ======================== 第二节  打印链表 ==========================
 //打印链表
 void PrintList(LinkList L) {
@@ -102,14 +107,118 @@ bool DeleteById(LinkList *L, int id) {
         p = p->next;            //  往后挪
     }
 
-    //  4. 跳出
-    
+    //  4. 跳出循环后，检查一下找到了没有
+    if (p == NULL) {
+        printf("未找到学号为 %d 的学生。\n", id);
+        return false;  //  没有找到
+    }
+
+    //  5. 找到了 p, 开始执行删除逻辑
+    if (prev == NULL) {
+        //  情况A: 要删除的是头结点(prev 还是 NULL)
+        *L = p->next;  //  让头结点直接指向第二个
+    }  else {
+        //  情况B: 要删除的是中间或者尾巴
+        //  让前一个节点，直接连向下一个节点，跳过 p
+        prev->next = p->next;
+    }
+
+    //  6. 释放内存（很重要！）
+    free(p);
+    printf(">> 成功删除学号为 %d 的学生。\n", id);
+    return true;
 }
 
+//  ======================== 第五节  把学号删除  ==========================
+//  按学号查找，返回节点指针
+Node* SearchById(LinkList L, int id) {
+    Node * p = L;
+    while (p != NULL) {
+        //  对比嵌套成员
+        if (p->data.id == id) return p;
+        p = p->next;
+    }
+    return NULL;  //  没找到
+}
 
+//  修改分数
+bool UpdateScore(LinkList L, int id, float newScore) {
+    //  复用上面的查找函数
+    Node *p = SearchById(L, id);
+    if (p == NULL) {
+        printf("未找到学号为 %d 的学生，无法修改。\n", id);
+        return false;
+    }
+    //  直接修改嵌套成员
+    p->data.score = newScore;
+    printf(">> 学号 %d 的分数已更新为 %.2f\n", id, newScore);
+    return true;
+}
 
+//  ======================== 第六节  把学号删除  ==========================
+//  按分数从高到低排序（冒泡排序思想）
+void SortByScore(LinkList L) {
+    if (L == NULL || L->next == NULL) return;  //  空域只有一个，不用排
 
+    Node *p, *q;
+    Student temp;           //  临时变量，用来交换两个学生数据
 
+    //  外展循环
+    for (p = L; p->next != NULL; p = p->next) {
+        //  内层循环
+        for (q = p->next; q != NULL; q = q->next) {
+            //   如果前面的分数比后面低，就交换（降序）
+            if (p->data.score < q->data.score) {
+                temp = p->data;
+                p->data = q->data;
+                q->data = temp;
+            }
+        }
+    }
+    printf(">> 已按分数降序排序。\n");
+}
+
+//  ======================== 第七节 把学号删除  ==========================
+int main(void) {
+    //  1. 初始化
+    LinkList classList = InitList();        //  班级链表
+
+    //  2. 准备数据（定义几个学生）
+    Student s1 = {101, "张三", 85.5};
+    Student s2 = {102, "李四", 92.0};
+    Student s3 = {103, "王五", 78.5};
+    Student s4 = {104, "赵六", 88.0};
+
+    // 3. 测试录入
+    printf("=== 1. 录入数据（尾插）===\n");
+    PushBack(&classList, s1);
+    PushBack(&classList, s2);
+    PushBack(&classList, s3);
+    PushBack(&classList, s4);
+
+    //  4. 测试头插（插个学霸）
+    printf("\n=== 2. 插入转校生（头插：孙七 95分）===\n");
+    Student s5 = {105, "孙七", 95.5};
+    PushFront(&classList, s5);
+    PrintList(classList);
+
+    //  5. 测试修改
+    printf("\n=== 3. 修改分数（把103的分数改为100）===\n");
+    UpdateScore(classList, 103, 100.0);
+    PrintList(classList);
+
+    //  6. 测试排序
+    printf("\n=== 4. 按分数排序（从高到低）===\n");
+    SortByScore(classList);
+    PrintList(classList);
+
+    //  7. 测试删除
+    printf("\n=== 5. 按学号删除（删除 id=102) ===\n");
+    DeleteById(&classList, 102);
+    PrintList(classList);
+
+    return 0;
+}
 
 
 
