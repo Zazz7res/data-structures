@@ -1,0 +1,300 @@
+// ================ 第一阶段 ==============
+#include <complex.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+
+//  定义书的结构体
+typedef struct {
+    int id;
+    char name[50];
+    float price;
+} Book;
+
+//  定义书架的结构体
+typedef struct {
+    Book *data;
+    int length;
+    int capacity;
+} SqList;
+
+//  清理缓冲区，吃掉缓冲区里多余的字符
+void ClearBuffer() {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+}
+// ================ 第二阶段 搭建骨架（基础内存管理）==============
+//  初始化
+void InitList(SqList *L) {
+    L->data = (Book *)malloc(sizeof(Book) * 4);  //  初始化4个位置
+    if (!L->data) exit(-1);
+    L->length = 0;
+    L->capacity = 4;
+    printf(">> 书架初始化完成，初始容量：%d\n", L->capacity);
+}
+
+//  检查容量（内部自动调用）
+void CheckCapacity(SqList *L) {
+    if (L->length >= L->capacity) {
+        int newCap = L->capacity * 2;       //  翻倍扩容
+        Book *newSpace = (Book *) realloc(L->data, sizeof(Book) * newCap);
+        if (!newSpace) {
+            printf("增容失败！\n");
+            return;
+        }
+        L->data = newSpace;
+        L->capacity = newCap;
+        printf(">> 书架已扩容，当前容量：%d\n", L->capacity);
+    }
+}
+
+// ================ 第三阶段 难点：插入逻辑 ==============
+//  1. 尾插法（最简单的添加）
+void AddBooks(SqList *L, Book b) {
+    CheckCapacity(L);        //  先看有没有地方
+    L->data[L->length] = b;     //  放在最后面
+    L->length++;
+    printf(">> 入库成功：《%s》\n", b.name);
+}
+
+//  2. 指定位置插入（重点）
+void InsertBookAt(SqList *L, int i, Book b) {
+    //  合法性检查：位置不能小于 0, 也不能大于长度（可以插在最后面）
+    if (i < 0 || i > L->length) {
+        printf(">> 错误：插入位置 %d 无效\n", i);
+        return;
+    }
+
+    CheckCapacity(L);         // 记得也要检查空间
+
+    for (int j = L->length; j > i; j--) {
+        L->data[j] = L->data[j - 1];
+    }
+
+    //  腾出空为了，放入新书
+    L->data[i] = b;
+    L->length++;
+    printf(">> 插入成功：《%s》 插入到了第 %d 个位置\n", b.name, i + 1);
+}
+
+// ================ 第四阶段 查找功能 ==============
+//  按 ID 查找
+int FindBookId(sqList L, int id) {
+    for (int i = 0; i < L.length; i++) {
+        if (L.data[i].id == id) return i;
+    }
+    return -1;  //  没有找到
+}
+
+//  按书名查找（支持模糊搜索）
+void FindBooksByName(SqList L, char *name) {
+    int count = 0;
+    printf(">> 查找结果：\n");
+    for (int i = 0; i < L.length; i++) {
+        //  strstr(str1, str2) 如果 str2 是 str1 的自串，返回非空
+        if (strstr(L.data[i].name, name) != NULL) {
+            printf("    [%d] ID: %d, 书名：%s, 价格：%.2f\n", i, L.data[i].id, L.data[i].name, L.data[i].price);
+            count++;
+        }
+    }
+    if (count == 0) printf("    未找到相关书籍。\n");
+}
+
+// ================ 第五阶段 修改与删除 ==============
+//  修改价格
+void UpdateBook(SqList *L, int id, float newPrice) {
+    int index = FindBookId(*L, id);
+    if (index == -1) {
+        printf(">> 错误：找不到 ID 为 %d 的书\n", id);
+        return;
+    }
+    L->data[index].price = newPrice;
+    printf(">> 修改成功：《 %s》 价格已更新为 %.2f\n", L->data[index].name, newPrice);
+}
+
+//  按位置删除（通用删除）
+void RemoveBookAt(SqList *L, int i) {
+    if (i < 0 || i >= L->length) {
+        printf(">> 错误：删除位置 %d 无效\n", i);
+        return;
+    }
+    
+    //  记录一下要删除谁，好打印日志
+    Book deleteBook = L->data[i];
+
+    //  核心逻辑：覆盖
+    //  从 i 位置开始，后面的人全部往前一步
+    for (int j = i; j < L->length - 1; j++) {
+        L->data[j] = L->data[j + 1];
+    }
+    L->length--;
+    printf(">> 下架成功：第 %d 位的书籍《%s》已移除\n", i + 1, deleteBook.name);
+}
+
+// ================ 第六阶段 排序 ==============
+void SortByPrice(SqList *L) {
+    if (L->length < 2) return;
+        
+    for (int i = 0; i < L->length; i++) {
+        //  假设当前位置 i 是最小的
+        int minIndex = i;
+
+        //  去 i 后面看看有没有更小的
+        for (int j = i + 1; j < L->length; j++) {
+            if (L->data[j].price) < L->data[minIndex].price {
+                minIndex = j;  //  发现更小的，更新最小值的下标
+            }
+        }
+
+        //  如果发现后面确实有更小的，就交换位置
+        if (minIndex != i) {
+            Book temp = L->data[i];
+            L->data[i] = L->data[minIndex];
+            L->data[minIndex] = temp;
+        }
+    }
+    printf(">> 排序完成：按价格升序排列。\n");
+}
+
+// ================ 第七阶段 界面与交互 ==============
+//  打印列表
+void PrintList(SqList L) {
+    printf("\n=========================== 当前馆藏列表（总数：%d）====================\n", L.length);
+    if (L.length == 0) { pirntf("（空空如也）\n"); return; }
+
+    printf("%-5s %-20s %-10s %-10s\n", "ID", " 书名", "作者", "价格");
+    for (int i = 0; i < L.length; i++) {
+        printf("%-5d %-20s %-10s %-10.2f\n", L.data[i].id, L.data[i].name, L.[data].author, L.data[i].price);
+    }
+    printf("==============================================\n\n");
+
+    //  手动输入一本书的信息（为了 main 函数简介）
+    Book InputBookInfo() {
+        printf("请输入 ID: "); scanf("%d", &b.id);
+        printf("请输入 书名: "); scanf("%d", &b.name);
+        printf("请输入 作者: "); scanf("%d", &b.author);
+        printf("请输入 价格: "); scanf("%d", &b.price);
+        return b;
+    }
+
+    void Menu() {
+        printf("\n=========================== 图书管理系统 =========================\n");
+        printf("1. 尾部新增书籍\n", args);
+        printf("2. 指定位置插入\n");
+        printf("3. 查看所有书籍\n");
+        printf("4. 按书名查找\n");
+        printf("5. 修改书籍价格\n");
+        printf("6. 按位置删除\n");
+        printf("7. 按价格排序\n");
+        printf("0. 退出\n");
+        printf("========================================================\n");
+        printf("请选择：");
+    }
+}
+    int main() {
+        SqList library;
+        InitList(&library);
+
+        int choice;
+        while (1) {
+            Menu();
+            if (scanf("%d", &choice) != 1) {
+                ClearBuffer();  //  防止输入字母导致死循环
+                continue;
+            }
+        }
+
+        switch (choice) {
+            case 1:  //   新增
+                AddBooks(&library, InputBookInfo());
+                break;
+            case 2:  //  插入
+                {
+                    int pos;
+                    printf("输入插入位置（0 - %d):", library.length); scanf("%d", &pos);
+                }
+                break;
+            case 3:  //  查看
+                PrintList(library);
+                break;
+            case 4:  //  查找
+                {
+                    char name[50];
+                    printf("输入书名关键词："); scanf("%s", &name);
+                    FindBooksByName(library, name);
+                }
+                break;
+            case 5:  //  修改
+                {
+                    int id; float price;
+                    printf("输入ID: "); scanf("%f", &&price);
+                    UpdateBook(&library, id, price);
+                }
+                break;
+            case 6:  //  删除 
+            default:
+                
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
