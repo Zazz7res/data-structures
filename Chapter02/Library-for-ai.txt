@@ -1,0 +1,41 @@
+//  定义“书”这个数据类型
+typedef struct {
+    int id;                     //  书号（唯一标识）
+    char name[50];              //  书名
+    char author[20];            //  作者
+    float price;                //  价格
+} Book;
+
+// 定义“顺序表”（即书架）
+typedef struct {
+    Book *data;                 //  指向动态数组的指针（存放书的地方）
+    int length;                 //  当前书架上有多少本书
+    int capacity;               //  书架最大能放多少本书
+} SqList;  //  Sequence List
+先定义了书和书架的结构体       注意，Book *data  这个指针是重点  通过它连接书本？连接什么？接着我们看驱动函数，是这么叫的对吗？int main(void) {
+    //  1. 开一家图书馆
+    SqList library;
+    InitList(&library);
+main开头，创建了一个  SqList 类型的结构体 library  因为就是一个书架  然后使用InitList()函数初始化library   现在我们回看InitList()函数  main()函数中  向InitList()函数传入了library的地址，在InitList()中定义了一个SqList *L结构体指针来接收，L指向SqList library结构体中的  data指针，并使用malloc()开辟了一块  Book * 4大小的空间。  并判断是否开辟成功，然后L->length & capacity 进行初始化，由此，成功初始化一个书架        //  2. 准备一些新书数据
+    Book b1 = {101, "C语言程序设计", "谭浩强", 45.00};
+    Book b2 = {102, "数据结构", "严蔚敏", 55.50};
+    Book b3 = {103, "红楼梦", "曹雪芹", 89.00};
+    Book b4 = {104, "三体", "刘慈欣", 93.00};
+使用 Book结构体类型创建了b1,2,3,4本书       //  3. 新书入库（测试插入和自动扩容）
+    printf("\n--- 正在入库 ---\n");
+    AddBook(&library, b1);
+    AddBook(&library, b2);
+    AddBook(&library, b3);
+    AddBook(&library, b4);  //  此时书架满了（容量4）
+然后使用AddBook()函数并向它传入library的地址和b1,2,3,4的数据,现在回看AddBook函数,void AddBook(SqList *L, Book b)   定义了一个指针和  Book b来接收数据       CheckCapacity(L);  // 先看有没有地方放
+检查容量，来看看 CheckCapacity(L);  函数是怎么回事。void CheckCapacity(SqList *L) {
+    if (L->length >= L->capacity) 检查现有书籍length是否超过设定容量。        int newCap = L->capacity * 2;
+        Book *newSpace = (Book *)realloc(L->data, sizeof(Book) * newCap);
+        if (newSpace == NULL) {
+            printf("增容失败！\n");
+            return ;
+        }
+        L->data = newSpace;
+        L->capacity = newCap;
+增量2倍，然后使用realloc开辟一块2倍大的地址然后将数据复制过去，data指向新地址，capacity乘2  返回AddBook函数        L->data[L->length] = b;
+很关键的一句，也是我一直没想明白的地方 但是看到这里知道了，我想明白了一些，SqList *L 这个结构体指针中有*data  这个指针  我们第一次初始化的时候已经给好空间了， 4 * Book的空间内存，可以使用data1 2 3 4来指向这开辟出来的地址对吧？然后每次使用AddBook()就把  b1 2 3 4的内容放进去，然后length + 1就完成了添加的操作。
