@@ -1,0 +1,46 @@
+
+int main(void) {
+    //  1. 初始化链表头指针
+    LinkList library = InitList();  先看开头  初始化了什么东西？LinkList  是什么？  InitList()这个函数是怎么实现初始化的？  typedef struct Node {
+    Book data;              //  数据域：存书
+    struct Node *next;      //  指针域：存下一本书的地址
+} Node;
+
+//  简单定义：LinkList 就是指向 Node 的指针
+typedef Node *LinkList;  定义了一个结构体  struct Node 是 模板  Node是结构类型？不知道他们应该怎么叫   然后  Node * LinkList  定义了一个可以指向结构体的指针   现在看看它们是怎么初始化的  
+LinkList InitList() {
+    return NULL;
+}   居然返回了一个空  接着往下看   
+    Book b1 = {101, "C程序设计"};
+    Book b2 = {102, "数据结构"};
+    Book b3 = {103, "算法导论"};
+    Book b4 = {104, "计算机网络"};  Book  应该是存放书的结构  通过Book b1 ...创建了一本书  typedef struct {
+    int id;
+    char name[50];
+} Book;
+这是Book的部分  突然我想到  我有点搞不懂  Node * LinkList   还有InitList()  
+    PushFront(&library, b1);  PushFront应该是插入一个节点  
+    LinkList library = InitList();
+//  简单定义：LinkList 就是指向 Node 的指针
+typedef Node *LinkList;  虽然注释写得很明白，但是我就是不理解，所以你要向我解释   我们继续    
+//  头插法：新书直接放到最前面
+//  注意：因为要修改头指针的指向，所以需要传头指针的地址
+void PushFront(LinkList *L, Book b) {
+    // 1. 申请新节点空间
+    Node *newNode = (Node *)malloc(sizeof(Node));
+    if (newNode == NULL) {
+        printf("内存不足，无法入库！\n");
+        return ;
+    }
+
+    // 2. 存入数据
+    newNode->data = b;
+
+    // 3. 插入逻辑（关键步骤）
+    // 先把新节点的 next 指向原来的头结点
+    newNode->next = *L;
+    // 再把头指针更新为这个新节点
+    *L = newNode;
+
+    printf(">> [头插] 入库成功：%s\n", b.name);
+}   这个叫做头插法，从头插入   *newNode  申请了一块地址空间  做了是否为空的判断  newNode 里面的指针data  指向b的地址   然后     看不懂。。。
